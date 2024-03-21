@@ -10,6 +10,11 @@ var app = {
   subtitle: "Put your life in the hands of a computer",
   options: []
 };
+var onMakeDecision = function onMakeDecision() {
+  var randNum = Math.floor(Math.random() * app.options.length);
+  var randOption = app.options[randNum];
+  alert(randOption);
+};
 var onRemoveAll = function onRemoveAll() {
   app.options = [];
   renderPage();
@@ -24,7 +29,10 @@ var onFormSubmit = function onFormSubmit(e) {
   }
 };
 var renderPage = function renderPage() {
-  var template = /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, app.title), app.subtitle && /*#__PURE__*/React.createElement("p", null, app.subtitle), /*#__PURE__*/React.createElement("p", null, app.options && app.options.length > 0 ? "Here are your options" : "No option"), /*#__PURE__*/React.createElement("p", null, "#option = ", app.options.length), /*#__PURE__*/React.createElement("button", {
+  var template = /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, app.title), app.subtitle && /*#__PURE__*/React.createElement("p", null, app.subtitle), /*#__PURE__*/React.createElement("p", null, app.options && app.options.length > 0 ? "Here are your options" : "No option"), /*#__PURE__*/React.createElement("button", {
+    disabled: app.options.length === 0,
+    onClick: onMakeDecision
+  }, "What should I do?"), /*#__PURE__*/React.createElement("button", {
     onClick: onRemoveAll
   }, "REMOVE ALL"), /*#__PURE__*/React.createElement("ol", null, app.options.map(function (option) {
     return /*#__PURE__*/React.createElement("li", {
